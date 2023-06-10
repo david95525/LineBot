@@ -6,7 +6,7 @@ namespace LineBot.Dtos.Messages
     {
         public TextMessageDto()
         {
-            Type = MessageEnum.Text;
+            Type = MessageTypeEnum.Text;
         }
         public string Text { get; set; }
         public List<TextMessageEmojiDto>? Emojis { get; set; }

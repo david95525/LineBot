@@ -6,7 +6,7 @@ namespace LineBot.Dtos.Messages
     {
         public AudioMessageDto()
         {
-            Type = MessageEnum.Audio;
+            Type = MessageTypeEnum.Audio;
         }
 
         public string OriginalContentUrl { get; set; }

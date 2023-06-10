@@ -6,7 +6,7 @@ namespace LineBot.Dtos.Messages
     {
         public VideoMessageDto()
         {
-            Type = MessageEnum.Video;
+            Type = MessageTypeEnum.Video;
         }
 
         public string OriginalContentUrl { get; set; }

@@ -38,7 +38,7 @@ namespace LineBot.Services
                 switch (eventObject.Type)
                 {
                     case WebhookEventTypeEnum.Message:
-                        if (eventObject.Message.Type == MessageEnum.Text)
+                        if (eventObject.Message.Type == MessageTypeEnum.Text)
                             ReceiveMessageWebhookEvent(eventObject);
                         break;
                     case WebhookEventTypeEnum.Unsend:
@@ -101,25 +101,25 @@ namespace LineBot.Services
             dynamic messageRequest = new BroadcastMessageRequestDto<BaseMessageDto>();
             switch (messageType)
             {
-                case MessageEnum.Text:
+                case MessageTypeEnum.Text:
                     messageRequest = _jsonProvider.Deserialize<BroadcastMessageRequestDto<TextMessageDto>>(strBody);
                     break;
-                case MessageEnum.Sticker:
+                case MessageTypeEnum.Sticker:
                     messageRequest = _jsonProvider.Deserialize<BroadcastMessageRequestDto<StickerMessageDto>>(strBody);
                     break;
-                case MessageEnum.Image:
+                case MessageTypeEnum.Image:
                     messageRequest = _jsonProvider.Deserialize<BroadcastMessageRequestDto<ImageMessageDto>>(strBody);
                     break;
-                case MessageEnum.Video:
+                case MessageTypeEnum.Video:
                     messageRequest = _jsonProvider.Deserialize<BroadcastMessageRequestDto<VideoMessageDto>>(strBody);
                     break;
-                case MessageEnum.Audio:
+                case MessageTypeEnum.Audio:
                     messageRequest = _jsonProvider.Deserialize<BroadcastMessageRequestDto<AudioMessageDto>>(strBody);
                     break;
-                case MessageEnum.Location:
+                case MessageTypeEnum.Location:
                     messageRequest = _jsonProvider.Deserialize<BroadcastMessageRequestDto<LocationMessageDto>>(strBody);
                     break;
-                case MessageEnum.Imagemap:
+                case MessageTypeEnum.Imagemap:
                     messageRequest = _jsonProvider.Deserialize<BroadcastMessageRequestDto<ImagemapMessageDto>>(strBody);
                     break;
             }
@@ -183,7 +183,7 @@ namespace LineBot.Services
             switch (eventDto.Message.Type)
             {
                 // 收到文字訊息
-                case MessageEnum.Text:
+                case MessageTypeEnum.Text:
                     // 訊息內容等於 "測試" 時
                     if (eventDto.Message.Text == "測試")
                     {
@@ -297,6 +297,60 @@ namespace LineBot.Services
                                     {
                                         Name = "客服人員 2號",
                                         IconUrl = "https://f65a-61-30-129-78.ngrok-free.app/UploadFiles/gamer.png"
+                                    }
+                                }
+                            }
+                        };
+                    }
+                    // 關鍵字 : "Buttons"
+                    if (eventDto.Message.Text == "Buttons")
+                    {
+                        replyMessage = new ReplyMessageRequestDto<TemplateMessageDto<ButtonsTemplateDto>>
+                        {
+                            ReplyToken = eventDto.ReplyToken,
+                            Messages = new List<TemplateMessageDto<ButtonsTemplateDto>>
+                            {
+                                new TemplateMessageDto<ButtonsTemplateDto>
+                                {
+                                    AltText = "這是按鈕模板訊息",
+                                    Template = new ButtonsTemplateDto
+                                    {
+                                        ThumbnailImageUrl = "https://i.imgur.com/CP6ywwc.jpg",
+                                        ImageAspectRatio = TemplateImageAspectRatioEnum.Rectangle,
+                                        ImageSize = TemplateImageSizeEnum.Cover,
+                                        Title = "親愛的用戶您好，歡迎您使用本美食推薦系統",
+                                        Text = "請選擇今天想吃的主食，系統會推薦附近的餐廳給您。",
+                                        Actions = new List<ActionDto>
+                                        {
+                                            new ActionDto
+                                            {
+                                                Type = ActionTypeEnum.Postback,
+                                                Data = "foodType=sushi",
+                                                Label = "壽司",
+                                                DisplayText = "壽司"
+                                            },
+                                            new ActionDto
+                                            {
+                                                Type = ActionTypeEnum.Postback,
+                                                Data = "foodType=hot-pot",
+                                                Label = "火鍋",
+                                                DisplayText = "火鍋"
+                                            },
+                                            new ActionDto
+                                            {
+                                                Type = ActionTypeEnum.Postback,
+                                                Data = "foodType=steak",
+                                                Label = "牛排",
+                                                DisplayText = "牛排"
+                                            },
+                                            new ActionDto
+                                            {
+                                                Type = ActionTypeEnum.Postback,
+                                                Data = "foodType=next",
+                                                Label = "下一個",
+                                                DisplayText = "下一個"
+                                            }
+                                        }
                                     }
                                 }
                             }

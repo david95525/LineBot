@@ -6,7 +6,7 @@ namespace LineBot.Dtos.Messages
     {
         public LocationMessageDto()
         {
-            Type = MessageEnum.Location;
+            Type = MessageTypeEnum.Location;
         }
 
         public string Title { get; set; }

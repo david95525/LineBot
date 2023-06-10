@@ -6,7 +6,7 @@ namespace LineBot.Dtos.Messages
     {
         public ImageMessageDto()
         {
-            Type = MessageEnum.Image;
+            Type = MessageTypeEnum.Image;
         }
 
         public string OriginalContentUrl { get; set; }

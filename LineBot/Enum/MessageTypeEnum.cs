@@ -1,6 +1,6 @@
 ﻿namespace LineBot.Enum
 {
-    public static class MessageEnum
+    public static class MessageTypeEnum
     {
         public const string Text = "text";
         public const string Sticker = "sticker";
@@ -37,5 +37,24 @@
         public const string Date = "date";
         public const string Time = "time";
         public const string Datetime = "datetime";
+    }
+    public static class TemplateTypeEnum
+    {
+        public const string Buttons = "buttons";
+        public const string Confirm = "confirm";
+        public const string Carousel = "carousel";
+        public const string ImageCarousel = "image_carousel";
+    }
+
+    public static class TemplateImageAspectRatioEnum
+    {
+        public const string Rectangle = "rectangle";
+        public const string Square = "square";
+    }
+
+    public static class TemplateImageSizeEnum
+    {
+        public const string Cover = "cover";
+        public const string Contain = "contain";
     }
 }

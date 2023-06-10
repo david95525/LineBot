@@ -6,7 +6,7 @@ namespace LineBot.Dtos.Messages
     {
         public StickerMessageDto()
         {
-            Type = MessageEnum.Sticker;
+            Type = MessageTypeEnum.Sticker;
         }
         public string PackageId { get; set; }
         public string StickerId { get; set; }
