@@ -1,8 +1,7 @@
-﻿using LineBot.Dtos.Messages;
+﻿
 using LineBot.Dtos.Webhook;
 using LineBot.Services;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Filters;
 using System.ComponentModel.DataAnnotations;
 
 namespace LineBot.Controllers

@@ -1,39 +1,33 @@
 using LineBot.Services;
 using Microsoft.Extensions.FileProviders;
-using Swashbuckle.AspNetCore.Filters;
-using System.Reflection;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddSwaggerExamplesFromAssemblies(Assembly.GetEntryAssembly());
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.ExampleFilters();
-});
-
 builder.Services.AddSingleton<ILineBotService, LineBotService>();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo
+        {
+            Title = "LineBotServer",
+            Version = "v1"
+        });
+    });
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseSwagger();
+app.UseSwaggerUI();
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+
 }
-
 app.UseHttpsRedirection();
-
+app.UseStaticFiles();
 app.UseAuthorization();
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "UploadFiles")),
-    RequestPath = "/UploadFiles",
-});
 
 app.MapControllers();
 

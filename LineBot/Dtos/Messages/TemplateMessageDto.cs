@@ -28,4 +28,10 @@ namespace LineBot.Dtos.Messages
         public string? Title { get; set; }
         public string? DefaultAction { get; set; }
     }
+    public class ConfirmTemplateDto
+    {
+        public string Type { get; set; } = TemplateTypeEnum.Confirm;
+        public string Text { get; set; }
+        public List<ActionDto>? Actions { get; set; }
+    }
 }

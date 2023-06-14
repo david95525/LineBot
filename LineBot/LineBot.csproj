@@ -7,8 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\gamer.png" />
+    <None Include="wwwroot\man.png" />
+    <None Include="wwwroot\Original.png" />
+    <None Include="wwwroot\Preview.jpg" />
+    <None Include="wwwroot\test.m4a" />
+    <None Include="wwwroot\test.mp4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.6" />
   </ItemGroup>
 
 </Project>

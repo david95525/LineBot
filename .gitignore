@@ -53,3 +53,5 @@ dkms.conf
 /LineBot/obj
 /LineBot/bin/Debug/net6.0
 /.vs
+LineBot/bin/
+LineBot/Properties/PublishProfiles/

@@ -14,6 +14,7 @@ namespace LineBot.Services
     {
         private readonly string channelAccessToken;
         private readonly string channelSecret;
+        private readonly string Domain;
         private readonly IConfiguration _configuration;
         private readonly string replyMessageUri = "https://api.line.me/v2/bot/message/reply";
         private readonly string broadcastMessageUri = "https://api.line.me/v2/bot/message/broadcast";
@@ -25,6 +26,7 @@ namespace LineBot.Services
             _configuration = configuration;
             channelAccessToken = _configuration.GetSection("channelAccessToken").Value;
             channelSecret = _configuration.GetSection("channelSecret").Value;
+            Domain = _configuration.GetSection("Domain").Value;
         }
         /// <summary>
         /// 接收 webhook event 處理
@@ -287,7 +289,7 @@ namespace LineBot.Services
                                     Sender = new SenderDto
                                     {
                                         Name = "客服人員 1號",
-                                        IconUrl = "https://f65a-61-30-129-78.ngrok-free.app/UploadFiles/man.png"
+                                        IconUrl =Domain+ "/man.png"
                                     }
                                 },
                                 new TextMessageDto
@@ -296,7 +298,7 @@ namespace LineBot.Services
                                     Sender = new SenderDto
                                     {
                                         Name = "客服人員 2號",
-                                        IconUrl = "https://f65a-61-30-129-78.ngrok-free.app/UploadFiles/gamer.png"
+                                        IconUrl = Domain+"/gamer.png"
                                     }
                                 }
                             }
@@ -353,6 +355,44 @@ namespace LineBot.Services
                                         }
                                     }
                                 }
+                            }
+                        };
+                    }
+                    // 關鍵字 : "Confirm"
+                    if (eventDto.Message.Text == "Confirm")
+                    {
+                        replyMessage = new ReplyMessageRequestDto<TemplateMessageDto<ConfirmTemplateDto>>
+                        {
+                            ReplyToken = eventDto.ReplyToken,
+                            Messages = new List<TemplateMessageDto<ConfirmTemplateDto>>
+                            {
+                                new TemplateMessageDto<ConfirmTemplateDto>
+                                {
+                                    AltText = "這是確認模組訊息",
+                                    Template = new ConfirmTemplateDto
+                                    {
+                                        Text = "請問您是否喜歡本產品?\n(產品編號123)",
+                                        Actions = new List<ActionDto>
+                                        {
+                                            new ActionDto
+                                            {
+                                                Type = ActionTypeEnum.Postback,
+                                                Data = "id=123&like=yes",
+                                                Label = "喜歡",
+                                                DisplayText = "喜歡",
+                                            },
+                                            new ActionDto
+                                            {
+                                                Type = ActionTypeEnum.Postback,
+                                                Data = "id=123&like=no",
+                                                Label = "不喜歡",
+                                                DisplayText = "不喜歡",
+                                            }
+                                        }
+
+                                    }
+                                }
+
                             }
                         };
                     }
