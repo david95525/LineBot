@@ -12,5 +12,7 @@
         public const string MemberLeft = "memberLeft";
         public const string Postback = "postback";
         public const string VideoPlayComplete = "videoPlayComplete";
+        public const string FlexBubble = "flexBubble";
+        public const string FlexCarousel = "flexCarousel";
     }
 }
